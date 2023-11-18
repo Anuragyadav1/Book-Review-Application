@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
 const regd_users = express.Router();
-
 let users = [{"username":"Ikram","password":"ppapapapa"}];
 
 const isValid = (username)=>{ //returns boolean
@@ -17,9 +16,15 @@ const authenticatedUser = (username,password)=>{ //returns boolean
     return matchingUsers.length > 0;
 }
 
+regd_users.post("/tests", (req, res) => {
+    console.log("Received request at /test:", req.body);
+    res.send("Test endpoint reached");
+  });
+
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
+  console.log("Hello from the login route")
   console.log("login: ", req.body);
   const username = req.body.username;
   const password = req.body.password;
